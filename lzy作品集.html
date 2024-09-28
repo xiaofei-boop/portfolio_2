@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小肥一点都不肥的作品集</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1, h2, h3 {
+            font-weight: 300;
+        }
+        /* 导航栏样式 */
+        nav {
+            background-color: rgba(0,0,0,0.8);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li a {
+            color: #dae2e4;
+            text-decoration: none;
+            padding: 15px 20px;
+            display: block;
+            transition: opacity 0.3s;
+        }
+        nav ul li a:hover {
+            opacity: 0.7;
+        }
+        
+        /* 个人简介样式 */
+        #about {
+            text-align: center;
+            padding: 100px 0;
+            background-color: #f5f5f7;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        #about .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 10px;
+        }
+        #about img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+        /* 作品展示样式 */
+        .portfolio-item {
+            margin-bottom: 100px;
+            text-align: center;
+        }
+        .image-slider {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            height: 600px;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+        .image-slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
+        }
+        .image-slider img.active {
+            display: block;
+            opacity: 1;
+        }
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 50%;
+            font-size: 18px;
+            z-index: 10;
+        }
+        .prev { left: 20px; }
+        .next { right: 20px; }
+        /* 按钮样式 */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0071e3;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #0077ed;
+        }
+        /* 页脚样式 */
+        footer {
+            background-color: #f5f5f7;
+            padding: 40px 0;
+            text-align: center;
+        }
+        /* 分割线样式 */
+        .section-title {
+            text-align: center;
+            position: relative;
+            margin-bottom: 50px;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: #0071e3;
+            margin: 20px auto 0;
+        }
+
+        /* 添加新的样式 */
+        #about {
+            padding: 50px 0;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        #about .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .profile-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .profile-info h1 {
+            margin: 0 0 10px 0;
+        }
+
+        .profile-info p {
+            margin: 0;
+            color: #666;
+        }
+
+        .skills-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .skill-column {
+            flex-basis: 22%;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .skill-column h3 {
+            margin: 0 0 5px 0;
+            color: #59728a;
+            font-size: 16px;
+        }
+
+        .skill-column p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .profile-description {
+            text-align: justify;
+            margin-bottom: 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 768px) {
+            .skill-column {
+                flex-basis: 48%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .skill-column {
+                flex-basis: 100%;
+            }
+        }
+
+        
+        h2 {
+            position: relative;
+            padding: 10px 15px;
+            margin: 30px 0;
+            color: #ffffff;
+            font-weight: 500;
+            z-index: 1;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* 添加轻微的文字阴影 */
+        }
+
+        h2::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: -1000px;
+            right: -1000px;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        h4 {
+            display: inline-block;
+            background-color: #f0f0f0; /* 浅灰色背景，您可以根据需要调整颜色 */
+            padding: 5px 10px; /* 内边距，使背景色延伸到文字周围 */
+            margin-bottom: 15px; /* 底部外边距，与下方内容分开 */
+            border-radius: 5px; /* 圆角效果，可以根据喜好调整或删除 */
+            font-weight: 500; /* 稍微加粗字体 */
+            color: #333; /* 文字颜色，可以根据需要调整 */
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1); /* 添加轻微阴影效果，可以根据需要调整或删除 */
+        }
+
+        h3 {
+            display: inline-block;
+            background-color: #c5ccce; /* 浅灰色背景，您可以根据需要调整颜色 */
+            padding: 5px 10px; /* 内边距，使背景色延伸到文字周围 */
+            margin-bottom: 15px; /* 底部外边距，与下方内容分开 */
+            border-radius: 5px; /* 圆角效果，可以根据喜好调整或删除 */
+            font-weight: 500; /* 稍微加粗字体 */
+            color: #333; /* 文字颜色，可以根据需要调整 */
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1); /* 添加轻微阴影效果，可以根据需要调整或删除 */
+        }
+
+        .indented-paragraph {
+            text-indent: 2em;
+        }
+
+        
+
+
+        
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <ul>
+            <li><a href="#about">关于我</a></li>
+            <li><a href="#ai-concept">AI + 概念设计</a></li>
+            <li><a href="#ai-landscape">AI + 景观建筑设计</a></li>
+            <li><a href="#real-projects">实际建设项目</a></li>
+            <li><a href="#competitions">竞赛作品</a></li>
+            <li><a href="#other-designs">其他设计作品</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- 个人简介 -->
+        <section id="about" style="background-image: url('单张图片/page_9_img_2.png');">
+            <div class="container">
+                <div class="profile-header">
+                    <img src="单张图片/11111.png" alt="个人照片" class="profile-photo">
+                    <div class="profile-info">
+                        <h1>Hello, I'm 小肥一点都不肥</h1>
+                        <p>福州大学建筑系 风景园林设计（2017-2022）</p>
+                    </div>
+                </div>
+                <div class="skills-container">
+                    <div class="skill-column">
+                        <h4>AIGC工具</h4>
+                        <p>Stable diffusion, Midjourney, Comfy UI, Lora</p>
+                    </div>
+                    <div class="skill-column">
+                        <h4>建模</h4>
+                        <p>Rhino, Grasshopper, SketchUp</p>
+                    </div>
+                    <div class="skill-column">
+                        <h4>渲染</h4>
+                        <p>Lumion, Enscape, Vray, Ketshot</p>
+                    </div>
+                    <div class="skill-column">
+                        <h4>绘图</h4>
+                        <p>Photoshop, AutoCAD, Indesign, Lightroom</p>
+                    </div>
+                </div>
+                <p class="profile-description indented-paragraph">  
+                    作为一名拥有景观设计背景的专业人士，我擅长将设计理念与实际应用相结合，创造出既美观又实用的设计作品。擅长使用AI工具、跟踪最新AIGC技术发展，熟练搭建comfyui工作流、模型训练等。相信能将专业技能和创新思维应用于更广阔 的设计领域，结合AI工具创造出更多优秀的设计作品。
+                </p>
+            </div>
+        </section>
+
+        <!-- AI + 概念设计 -->
+        <section id="ai-concept">
+            <div class="container">
+                <h2 class="section-title">AI + 概念设计</h2>
+                <div class="portfolio-item">
+                    <div class="image-slider" id="portfolio-item-1">
+                        <img src="单张图片/page_3_img_1.png" alt="双生绿洲 - 上海嘉定未来城市畅想" class="slider-image">
+                        <img src="单张图片/page_4_img_1.png" alt="双生绿洲 - 上海嘉定未来城市畅想" class="slider-image">
+                        <img src="单张图片/page_5_img_2.png" alt="双生绿洲 - 上海嘉定未来城市畅想" class="slider-image">
+                        <img src="单张图片/page_6_img_3.png" alt="双生绿洲 - 上海嘉定未来城市畅想" class="slider-image">
+                        <img src="单张图片/page_7_img_1.png" alt="双生绿洲 - 上海嘉定未来城市畅想" class="slider-image">
+                        <a href="#" class="slider-nav prev">&lt;</a>
+                        <a href="#" class="slider-nav next">&gt;</a>
+                    </div>
+                    <h3>双生绿洲 - 上海嘉定未来城市畅想</h3>
+                    <p>
+                        阳光朋克风格的“双生绿洲”不仅仅是一种设计理念，它代表了一种对未来城市生活的憧憬和追求。在上海嘉定，我们期待通过这种设计，实现一个更加绿色、智能、和谐的城市环境，让每一位居民和游客都能感受到这座城市的独特魅力。
+                    </p>
+                    <a href="双生绿洲.html" class="btn">查看详情</a>
+                </div>
+                <div class="portfolio-item">
+                    <div class="image-slider" id="portfolio-item-2">
+                        <img src="单张图片/page_8_img_1.png" alt="寻光之旅 - 中世纪哥特教堂空间设计" class="slider-image">
+                        <img src="单张图片/page_9_img_2.png" alt="寻光之旅 - 中世纪哥特教堂空间设计" class="slider-image">
+                        <img src="单张图片/page_9_img_3.png" alt="寻光之旅 - 中世纪哥特教堂空间设计" class="slider-image">
+                        <img src="单张图片/page_10_img_4.png" alt="寻光之旅 - 中世纪哥特教堂空间设计" class="slider-image">
+                        <img src="单张图片/page_11_img_1.png" alt="寻光之旅 - 中世纪哥特教堂空间设计" class="slider-image">
+                        <img src="单张图片/page_11_img_2.png" alt="寻光之旅 - 中世纪哥特教堂空间设计" class="slider-image">
+                        <img src="单张图片/page_9_img_4.png" alt="寻光之旅 - 中世纪哥特教堂空间设计" class="slider-image">
+                        <img src="单张图片/page_10_img_2.png" alt="寻光之旅 - 中世纪哥特教堂空间设计" class="slider-image">
+
+                        <a href="#" class="slider-nav prev">&lt;</a>
+                        <a href="#" class="slider-nav next">&gt;</a>
+                    </div>
+                    <h3>寻光之旅 - 中世纪哥特教堂空间设计</h3>
+                    <p>
+                        在一个久远的世界里，时间仿佛静止，有一片神秘而奇妙的土地。欢迎来到《寻光之旅》。 该场景设计以一个中世纪教堂城镇为背景。这个城镇是一幅由石头建筑、狭窄的鹅卵石街道和隐蔽小巷交织而 成的画卷。空气中弥漫着历史的气息和一丝神秘的魔力。
+                    </p>
+                    <a href="寻光之旅.html" class="btn">查看详情</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI + 景观建筑设计 -->
+        <section id="ai-landscape">
+            <div class="container">
+                <h2 class="section-title">AI + 景观建筑设计</h2>
+                <div class="portfolio-item">
+                    <div class="image-slider" id="portfolio-item-3">
+                        <img src="单张图片/page_12_img_1.png" alt="地产景观展示区设计" class="slider-image">
+                        <img src="单张图片/page_13_img_2.png" alt="地产景观展示区设计" class="slider-image">
+                        <img src="单张图片/page_13_img_3.png" alt="地产景观展示区设计" class="slider-image">
+                        <img src="单张图片/page_14_img_5.png" alt="地产景观展示区设计" class="slider-image">
+                        <img src="单张图片/page_14_img_6.png" alt="地产景观展示区设计" class="slider-image">
+                        <img src="单张图片/page_14_img_7.png" alt="地产景观展示区设计" class="slider-image">
+                         
+                        <a href="#" class="slider-nav prev">&lt;</a>
+                        <a href="#" class="slider-nav next">&gt;</a>
+                    </div>
+                    <h3>地产景观展示区设计</h3>
+                    <p>
+                        新中式风格地产景观设计是一种将中国传统文化元素与现代设计理念相结合的设计方式，本设计同样使用素材训练Lora模型控制画面的方式完成。
+                    </p>
+                    <a href="新中式地产.html" class="btn">查看详情</a>
+                </div>
+                <div class="portfolio-item">
+                    <div class="image-slider" id="portfolio-item-4">
+                        <img src="每页图片/林震宇作品集2024.8-15.jpg" alt="民宿庭院设计" class="slider-image">
+                        <img src="单张图片/page_16_img_2.png" alt="民宿庭院设计" class="slider-image">
+                        <img src="单张图片/page_16_img_1.png" alt="民宿庭院设计" class="slider-image">
+                        <img src="单张图片/page_16_img_3.png" alt="民宿庭院设计" class="slider-image">
+                        <img src="单张图片/page_16_img_5.png" alt="民宿庭院设计" class="slider-image">
+                        <img src="单张图片/page_16_img_4.png" alt="民宿庭院设计" class="slider-image">
+
+                        <a href="#" class="slider-nav prev">&lt;</a>
+                        <a href="#" class="slider-nav next">&gt;</a>
+                    </div>
+                    <h3>民宿庭院设计</h3>
+                    <p>现代简约新中式庭院设计</p>
+                    
+                </div>
+                <div class="portfolio-item">
+                    <div class="image-slider" id="portfolio-item-5">
+                        <img src="单张图片/12.png" alt="城市滨水公园意向设计" class="slider-image">
+                        <img src="单张图片/13.png" alt="城市滨水公园意向设计" class="slider-image">
+                        <img src="单张图片/page_17_img_1.png" alt="城市滨水公园意向设计" class="slider-image">
+                        <img src="单张图片/page_17_img_2.png" alt="城市滨水公园意向设计" class="slider-image">
+                        <img src="单张图片/page_17_img_4.png" alt="城市滨水公园意向设计" class="slider-image">
+                        <img src="单张图片/page_17_img_5.png" alt="城市滨水公园意向设计" class="slider-image">
+                        <img src="单张图片/page_17_img_6.png" alt="城市滨水公园意向设计" class="slider-image">
+
+                        <a href="#" class="slider-nav prev">&lt;</a>
+                        <a href="#" class="slider-nav next">&gt;</a>
+                    </div>
+                    <h3>城市滨水公园意向设计</h3>
+                    <p>通过Lora模型控制驳岸曲线样式</p>
+                    <a href="滨水景观.html" class="btn">查看详情</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 实际建设项目经历 -->
+        <section id="real-projects">
+            <div class="container">
+                <h2 class="section-title">实际建设项目经历</h2>
+                <div class="portfolio-item">
+                    <div class="image-slider" id="portfolio-item-6">
+                        <img src="单张图片/微信图片_20221119124759.png" alt="地产展示区设计" class="slider-image">
+                        <img src="单张图片/微信图片_20221119124845.png" alt="地产展示区设计" class="slider-image">
+                        <img src="单张图片/微信图片_20221119124908.png" alt="地产展示区设计" class="slider-image">
+                        <img src="单张图片/微信图片_20221119124830.png" alt="地产展示区设计" class="slider-image">
+
+                        <a href="#" class="slider-nav prev">&lt;</a>
+                        <a href="#" class="slider-nav next">&gt;</a>
+                    </div>
+                    <h3>地产展示区设计</h3>
+                    <p></p>
+                    <a href="东湾地产展示区.html" class="btn">查看详情</a>
+                </div>
+                <div class="portfolio-item">
+                    <div class="image-slider" id="portfolio-item-7">
+                        <img src="单张图片/page_19_img_1.png" alt="深圳大鹏四季田园文旅设计" class="slider-image">
+                        <img src="单张图片/微信图片_20221119121908.png" alt="深圳大鹏四季田园文旅设计" class="slider-image">
+                        <img src="单张图片/微信图片_20221119121914.png" alt="深圳大鹏四季田园文旅设计" class="slider-image">
+                        <img src="单张图片/微信图片_20221119121840.png" alt="深圳大鹏四季田园文旅设计" class="slider-image">
+                        <img src="单张图片/微信图片_20221119121814.png" alt="深圳大鹏四季田园文旅设计" class="slider-image">
+                        <img src="单张图片/微信图片_20221119121918.png" alt="深圳大鹏四季田园文旅设计" class="slider-image">
+
+                        <a href="#" class="slider-nav prev">&lt;</a>
+                        <a href="#" class="slider-nav next">&gt;</a>
+                    </div>
+                    <h3>深圳大鹏四季田园文旅设计</h3>
+                    <p>一个集农业科技展示、田园体验和研学教育于一体的综合性旅游目的地</p>
+                    <a href="大鹏四季田园.html" class="btn">查看详情</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 竞赛作品 -->
+        <section id="competitions">
+            <div class="container">
+                <h2 class="section-title">竞赛作品</h2>
+                <div class="portfolio-item">
+                    <div class="image-slider" id="portfolio-item-8">
+                        <img src="每页图片/林震宇作品集2024.8-22.jpg" alt="Grave to cradle - 武汉新冠疫情纪念园" class="slider-image">
+                        <img src="每页图片/林震宇作品集2024.8-23.jpg" alt="Grave to cradle - 武汉新冠疫情纪念园" class="slider-image">
+                        <img src="每页图片/林震宇作品集2024.8-24.jpg" alt="Grave to cradle - 武汉新冠疫情纪念园" class="slider-image">
+                        <img src="每页图片/林震宇作品集2024.8-25.jpg" alt="Grave to cradle - 武汉新冠疫情纪念园" class="slider-image">
+
+                        <a href="#" class="slider-nav prev">&lt;</a>
+                        <a href="#" class="slider-nav next">&gt;</a>
+                    </div>
+                    <h3>Grave to cradle - 武汉新冠疫情纪念园</h3>
+                    <p>
+                        我们选择在武汉这座英雄城市也是国内新冠疫情心理受创最严重的城市设计一座“城市摇篮”纪念这次疫情。
+                    </p>
+                    <a href="竞赛.html" class="btn">查看详情</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI + 其他设计作品 -->
+        <section id="other-designs">
+            <div class="container">
+                <h2 class="section-title">AI + 其他设计作品</h2>
+                <div class="portfolio-item">
+                    <div class="image-slider" id="portfolio-item-9">
+                        <img src="单张图片/page_26_img_1.png" alt="室内设计" class="slider-image">
+                        <img src="单张图片/page_26_img_2.png" alt="室内设计" class="slider-image">
+                        <img src="单张图片/page_26_img_3.png" alt="室内设计" class="slider-image">
+                        <img src="单张图片/page_26_img_4.png" alt="室内设计" class="slider-image">
+
+                        <a href="#" class="slider-nav prev">&lt;</a>
+                        <a href="#" class="slider-nav next">&gt;</a>
+                    </div>
+                    <h3>室内设计</h3>
+                    <p></p>
+                    
+                </div>
+                <div class="portfolio-item">
+                    <div class="image-slider" id="portfolio-item-10">
+                        <img src="单张图片/page_27_img_5.png" alt="电商产品设计" class="slider-image">
+                        <img src="单张图片/page_27_img_3.png" alt="电商产品设计" class="slider-image">
+                        <img src="单张图片/page_27_img_6.png" alt="电商产品设计" class="slider-image">
+                        <img src="单张图片/page_27_img_4.png" alt="电商产品设计" class="slider-image">
+                        <img src="单张图片/page_27_img_2.png" alt="电商产品设计" class="slider-image">
+                        <img src="单张图片/page_27_img_1.png" alt="电商产品设计" class="slider-image">
+
+                        <a href="#" class="slider-nav prev">&lt;</a>
+                        <a href="#" class="slider-nav next">&gt;</a>
+                    </div>
+                    <h3>电商产品设计</h3>
+                    <p></p>
+                    
+                </div>
+                <div class="portfolio-item">
+                    <div class="image-slider" id="portfolio-item-11">
+                        <img src="单张图片/page_28_img_1.png" alt="创意海报设计" class="slider-image">
+                        <img src="单张图片/page_28_img_2.png" alt="创意海报设计" class="slider-image">
+                        
+                        <a href="#" class="slider-nav prev">&lt;</a>
+                        <a href="#" class="slider-nav next">&gt;</a>
+                    </div>
+                    <h3>创意海报设计</h3>
+                    <p></p>
+                    
+                </div>
+                <div class="portfolio-item">
+                    <div class="image-slider" id="portfolio-item-12">
+                        <img src="单张图片/21.jpg" alt="手绘作品" class="slider-image">
+                        <img src="单张图片/19.jpg" alt="手绘作品" class="slider-image">
+                        <img src="单张图片/20.jpg" alt="手绘作品" class="slider-image">
+                        <a href="#" class="slider-nav prev">&lt;</a>
+                        <a href="#" class="slider-nav next">&gt;</a>
+                    </div>
+                    <h3>手绘作品</h3>
+                    <p></p>
+                    
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <h3>联系我</h3>
+            <p>邮箱：<a href="mailto:535693132@qq.com">535693132@qq.com</a></p>
+            <div class="social-icons">
+                <span>微信：l535693132</span>
+                <span> </span>
+                <span>微博：小肥一点都不肥</span>
+                <a href="#" target="_blank">LinkedIn</a>
+            </div>
+            <p>&copy; 2024 小肥一点都不肥。所有权利保留。</p>
+        </div>
+    </footer>
+
+    <script>
+        function createSlider(containerId) {
+            let currentIndex = 0;
+            const container = document.getElementById(containerId);
+            const imageElements = container.querySelectorAll('.slider-image');
+            const prevButton = container.querySelector('.prev');
+            const nextButton = container.querySelector('.next');
+
+            function updateImage() {
+                imageElements.forEach((img, index) => {
+                    img.classList.remove('active');
+                });
+                imageElements[currentIndex].classList.add('active');
+            }
+
+            function showPrev(e) {
+                e.preventDefault();
+                currentIndex = (currentIndex - 1 + imageElements.length) % imageElements.length;
+                updateImage();
+            }
+
+            function showNext(e) {
+                e.preventDefault();
+                currentIndex = (currentIndex + 1) % imageElements.length;
+                updateImage();
+            }
+
+            prevButton.addEventListener('click', showPrev);
+            nextButton.addEventListener('click', showNext);
+
+            // 添加触摸滑动支持
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            container.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+
+            container.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                if (touchStartX - touchEndX > 50) {
+                    showNext(e);
+                } else if (touchEndX - touchStartX > 50) {
+                    showPrev(e);
+                }
+            }, false);
+
+            // 添加键盘支持
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') {
+                    showPrev(e);
+                } else if (e.key === 'ArrowRight') {
+                    showNext(e);
+                }
+            });
+
+            updateImage(); // 初始化显示第一张图片
+        }
+
+        // 在页面加载完成后初始化所有滑块
+        window.addEventListener('load', function() {
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            portfolioItems.forEach((item, index) => {
+                createSlider(`portfolio-item-${index + 1}`);
+            });
+        });
+    </script>
+</body>
+</html>

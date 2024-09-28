@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滨水景观设计 | 小肥一点都不肥的作品集</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            font-family: 'Noto Sans SC', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f8f8f8;
+        }
+        .header {
+            background-image: url('单张图片/12.png');
+            background-size: cover;
+            background-position: center;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        
+        h1 {
+            font-weight: 300; /* 改为更细的字重 */
+            font-size: 2.8em; /* 稍微减小字体大小 */
+            color: #ffffff;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3); /* 减轻文字阴影 */
+            line-height: 1.3; /* 调整行高 */
+            letter-spacing: 1px; /* 增加字间距 */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .project-description {
+            font-size: 1.1em;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        .image-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 40px; /* 增加底部间距 */ 
+        }
+        .image-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+        }
+        .image-item img {
+            width: 100%;
+            height: 100%;   
+            display: block;
+            transition: transform 0.3s ease;    
+        }
+
+        .image-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-description {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        .image-item:hover .image-description {
+            transform: translateY(0);
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #0071e3;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 40px;
+        }
+        .btn:hover {
+            background-color: #005bbf;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .text-center {
+            text-align: center;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        .image-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 40px; /* 增加底部间距 */
+        }
+
+        .image-description {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .image-item:hover .image-description {
+            transform: translateY(0);
+        }
+
+        .image-text {
+            margin-top: 20px;
+            color: #333;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>滨水景观设计<br></h1>
+    </header>
+
+    <div class="container">
+        <div class="image-container">
+            <div class="image-item">
+                <img src="每页图片/林震宇作品集2024.8-17.jpg" alt="滨水景观设计">
+                <div class="image-description">滨水景观</div>
+                <div class="image-text">
+                    <h2>滨水景观设计</h2>
+                    <p>本设计的核心理念是通过Lora模型控制驳岸曲线样式，实现滨水空间的动态变化与自然融合。 Lora 模型是一种基于机器学习的算法，能够根据环境数据和设计参数，生成适应性强、形态优美的 驳岸曲线。这种技术的应用，将使滨水空间的设计更加科学、合理，同时充满艺术性和创新性。</p>
+                </div>
+            </div>
+            
+         
+        </div>
+        <div class="text-center">
+            <a href="lzy作品集.html" class="btn">返回作品集</a>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 小肥一点都不肥的作品集. 保留所有权利。</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 图片加载优化
+            const images = document.querySelectorAll('.image-item img');
+            images.forEach(img => {
+                img.setAttribute('loading', 'lazy');
+            });
+
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // 图片点击放大效果
+            const imageItems = document.querySelectorAll('.image-item');
+            imageItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                });
+            });
+
+            // 页面加载动画
+            window.addEventListener('load', function() {
+                document.body.classList.add('loaded');
+            });
+        });
+    </script>
+</body>
+</html>
